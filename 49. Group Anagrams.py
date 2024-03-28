@@ -12,7 +12,6 @@ class Solution:
             # print('count:', count)
 
             res[tuple(count)].append(s) 
-            #The error "TypeError: unhashable type: 'list'" occurs when you try to use a    list object as a key in a dictionary or as an element in a set. Lists are mutable and therefore not hashable. Hashable objects are objects with a hash value that does not change over time. Examples of hashable objects include tuples and strings. To solve this error, you can ensure that you only assign a hashable object as a key for a dictionary. For example, you can convert a list to a tuple before using it as a key.
             # print('res:', res)
 
         return res.values()
@@ -20,3 +19,11 @@ class Solution:
 
     #   res = dict()
     #   print(res)
+## Note: 
+
+# The error "TypeError: unhashable type: 'list'" occurs when you try to use a list object as a key in a dictionary or as an element in a set. 
+# Lists are mutable and therefore not hashable. 
+# Hashable objects are objects with a hash value that does not change over time. 
+# Examples of hashable objects include tuples and strings.
+# To solve this error, you can ensure that you only assign a hashable object as a key for a dictionary. 
+# For example, you can convert a list to a tuple before using it as a key

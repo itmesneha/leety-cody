@@ -13,7 +13,7 @@ class Solution:
         #     hashset[i].add(i)
         #     hashset[i].add(i + 2)
 
-        print('hashset: ', hashset)
+        #print('hashset: ', hashset)
 
         for r in range(9):
             for c in range(9):

@@ -10,10 +10,6 @@ class Solution:
             if idx1 > len(digits):
                 return
             for letter in self.dic[digits[idx1]]:
-                ans = ans + letter
-                idx1 += 1
-                fn(idx1, ans)
-                idx1 -= 1
-                ans = ans[:-1]
+                fn(idx1 + 1, ans + letter)
         fn(0, '')
         return self.res

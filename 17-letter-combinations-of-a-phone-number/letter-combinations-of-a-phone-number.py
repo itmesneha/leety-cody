@@ -7,8 +7,6 @@ class Solution:
                 if len(ans) > 0:
                     self.res.append(ans)
                 return
-            if idx1 > len(digits):
-                return
             for letter in self.dic[digits[idx1]]:
                 fn(idx1 + 1, ans + letter)
         fn(0, '')

@@ -1,10 +1,8 @@
 class Solution:
     def largestGoodInteger(self, num: str) -> str:
-        res = -1
-        ans = ''
+        res = ''
         for i in range(1, len(num) - 1):
-            if num[i] == num[i-1] and num[i] == num[i+1]:
-                if ord(num[i]) - ord('0') > res:
-                    ans = ''.join(num[i-1:i+2])
-                    res = ord(num[i]) - ord('0')
-        return ans
+            if num[i] == num[i-1] == num[i+1]:
+                if res == '' or num[i] > res[0]:
+                    res = num[i-1 : i + 2]
+        return res

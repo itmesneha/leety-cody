@@ -8,7 +8,7 @@ class Solution:
         pre = []
         temp = 1
         for i in range(len(powers)):
-            temp *= powers[i]
+            temp *= powers[i] % mod
             pre.append(temp)
         # print(pre)
         ans = []

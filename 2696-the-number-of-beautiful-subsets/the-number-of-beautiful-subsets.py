@@ -1,16 +1,16 @@
 class Solution:
     def beautifulSubsets(self, nums: List[int], k: int) -> int:
-        self.res = []
         nums.sort()
         def fn(idx, subs):
             if idx == len(nums):
                 if len(subs) != 0:
-                    self.res.append(subs)
-                return
-            fn(idx + 1, subs)
+                    return 1
+                else:
+                    return 0
+            reject = fn(idx + 1, subs)
+            take = 0
             if nums[idx] - k not in subs:
-                fn(idx + 1, subs + [nums[idx]])
-           
+                take = fn(idx + 1, subs + [nums[idx]])
+            return take + reject
 
-        fn(0, [])
-        return len(self.res)
+        return fn(0, [])

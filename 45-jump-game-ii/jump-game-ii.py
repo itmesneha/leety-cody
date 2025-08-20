@@ -1,18 +1,16 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
+        jumps = 0
+        r = 0
         n = len(nums)
-        self.memo = [-1 for _ in range(n + 1)]
-        def fn(idx):
-            if idx >= n-1:
-                return 0
-            if self.memo[idx] != -1:
-                return self.memo[idx]
-            ans = float('inf')
-            for i in range(1, nums[idx] + 1):
-                if idx + i < n:
-                    ans = min(ans , 1 + fn(idx + i))
-            self.memo[idx] = ans 
-            return self.memo[idx]
-
-        return fn(0)
-        
+        l = 0
+        if n == 1:
+            return 0
+        while r < n-1:
+            farthest = 0
+            for i in range(l, r + 1):
+                farthest = max(farthest, i + nums[i])
+            l += 1
+            r = farthest
+            jumps += 1
+        return jumps

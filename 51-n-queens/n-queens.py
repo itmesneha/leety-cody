@@ -8,11 +8,23 @@ class Solution:
                 # same column
                 if board[i][col] == 'Q':
                     return False
-                # diagonal
-                if col - (row - i) >= 0 and board[i][col - (row - i)] == 'Q':
+                
+            i = row - 1
+            j = col - 1
+            while i >= 0 and j >= 0:
+                if board[i][j] == 'Q':
                     return False
-                if col + (row - i) < n and board[i][col + (row - i)] == 'Q':
+                i -= 1
+                j -= 1
+
+            i = row-1
+            j = col + 1
+            while i >= 0 and j < n:
+                if board[i][j] == 'Q':
                     return False
+                i -= 1
+                j += 1
+                
             return True
 
         def fn(row):

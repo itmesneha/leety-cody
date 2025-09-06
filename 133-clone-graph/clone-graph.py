@@ -13,11 +13,11 @@ class Solution:
             return None
         map = {}
         def dfs(cur):
-            if cur in map:
-                return map[cur]
+            if cur.val in map:
+                return map[cur.val]
             
             copy = Node(cur.val, [])
-            map[cur] = copy
+            map[cur.val] = copy
             for neighbor in cur.neighbors:
                 copy.neighbors.append(dfs(neighbor))
 

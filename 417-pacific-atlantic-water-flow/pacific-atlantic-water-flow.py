@@ -29,9 +29,10 @@ class Solution:
         for j in range(n):
             dfs(m-1, j, atl, grid[m-1][j])
 
-        ans = []
-        for val in pac:
-            if val in atl:
-                ans.append(val)
+        # ans = []
+        # for val in pac:
+        #     if val in atl:
+        #         ans.append(val)
 
-        return ans
+        # return ans
+        return list(pac & atl)

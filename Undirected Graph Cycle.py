@@ -5,18 +5,19 @@ class Solution:
 	    for u,v in edges:
 	        adj[u].append(v)
 	        adj[v].append(u)
-	   # print('adj:', adj)
+	        
 	    visited = [False] * n
 	    
 	    def dfs(u, parent):
-	        if visited[u]:
-	            return True
 	        visited[u] = True
 	        for v in adj[u]:
-	            if not visited[v]:
-	                if dfs(v, u):
-	                    return True
-	            elif v != parent:
+	            if v == parent:
+	                continue
+	            
+	            if visited[v]:
+	                return True
+	  
+	            if dfs(v, u):
 	                return True
 	                    
 	        return False
@@ -24,7 +25,7 @@ class Solution:
 	    # parse all individual nodes
 	    
 	    for u in range(n):
-	        if dfs(u, -1):
+	        if not visited[u] and dfs(u, -1):
 	            return True
 	    return False
 	        

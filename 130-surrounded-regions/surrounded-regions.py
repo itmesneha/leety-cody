@@ -19,7 +19,6 @@ class Solution:
         for i in range(m):
             for j in range(n):
                 if board[i][j] == 'O' and (i in [0, m-1] or j in [0, n-1]):
-                    # board[i][j] = 'T'
                     capture(i, j)
 
         # convert remaining Os to Xs & remaining Ts to Os

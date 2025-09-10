@@ -8,19 +8,15 @@ class Solution:
         if not head or not head.next:
             return head
         
-        p1 = head
-        even_head = p1.next
-        count = 1 
-        while p1.next:
-            prev = p1
-            count += 1
-            temp  = p1.next
-            p1.next = temp.next
-            p1 = temp
+        odd = head
+        even_head = head.next
+        even = head.next
 
-        if count % 2 != 0:
-            p1.next = even_head
-        else:
-            prev.next = even_head
+        while even and even.next:
+            odd.next = even.next
+            odd = odd.next
+            even.next = odd.next
+            even = even.next
 
+        odd.next = even_head
         return head

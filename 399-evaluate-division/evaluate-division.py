@@ -23,7 +23,7 @@ class Solution:
         
         for start, end in queries:
             if start not in adj or end not in adj:
-                res.append(-1.0)
+                res.append(-1)
             else:
                 visited = set()
                 res.append(dfs(start, end, 1, visited))

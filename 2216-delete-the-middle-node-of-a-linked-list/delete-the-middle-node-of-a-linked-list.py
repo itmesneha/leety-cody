@@ -17,11 +17,11 @@ class Solution:
             cur = cur.next
 
         middle = floor(count/2)
-        print('middle: ', middle)
+        # print('middle: ', middle)
         pos = 0
         cur = head
         while pos != middle:
-            print('pos: ', pos)
+            # print('pos: ', pos)
             pos += 1
             prev = cur
             cur = cur.next

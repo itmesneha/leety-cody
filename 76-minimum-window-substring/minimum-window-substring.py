@@ -9,7 +9,7 @@ class Solution:
         n = len(s)
         start = 0
         end = 0
-        minsubstring = ''
+        ans_indexes = [-1,-1]
         minlength = float('inf')
         have_count = 0
         required_count = len(required)
@@ -20,12 +20,14 @@ class Solution:
                     have_count += 1
                 while have_count == required_count:
                     if end - start + 1 < minlength:
-                        minsubstring = s[start:end+1]
+                        ans_indexes = [start, end]
                         minlength = end - start + 1
                     if s[start] in required:
                         have[s[start]] -= 1
                         if have[s[start]] < required[s[start]]:
                             have_count -= 1
                     start += 1
-
-        return minsubstring if minlength != float('inf') else ''
+        if minlength == float('inf'):
+            return ''
+        else:
+            return s[ans_indexes[0] : ans_indexes[1] + 1] 

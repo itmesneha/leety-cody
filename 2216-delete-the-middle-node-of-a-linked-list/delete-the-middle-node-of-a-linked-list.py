@@ -6,28 +6,22 @@
 class Solution:
     def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         count = 0
-        if not head:
-            return head
-        if not head.next:
+        if not head or not head.next:
             return None
 
+        # count length
         cur = head
         while cur:
             count += 1
             cur = cur.next
 
-        middle = floor(count/2)
-        # print('middle: ', middle)
-        pos = 0
+        middle = count // 2
+
         cur = head
-        while pos != middle:
-            # print('pos: ', pos)
-            pos += 1
-            prev = cur
+        for _ in range(middle - 1):
             cur = cur.next
 
-        prev.next = cur.next
-        cur.next = None
-
+        cur.next = cur.next.next
+        
         return head
 

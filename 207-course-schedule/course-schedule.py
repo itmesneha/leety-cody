@@ -11,16 +11,16 @@ class Solution:
         for i in range(n):
             if indegree[i] == 0:
                 q.append(i)
-        print('q: ', q)
+        # print('q: ', q)
         nodecount = 0
         while q:
             cur = q.popleft()
-            print('q: ', q)
+            # print('q: ', q)
             for child in adj[cur]:
                 indegree[child] -= 1
                 if indegree[child] == 0:
                     q.append(child)
             nodecount += 1
-            print('nodecount: ', nodecount)
+            # print('nodecount: ', nodecount)
 
         return nodecount == n # no cycle therefore can take course , else not.

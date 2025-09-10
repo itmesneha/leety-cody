@@ -4,22 +4,22 @@ class Solution:
         visited = [False] * n
         count = 0
 
-        # def bfs(city):
-        #     q = deque()
-        #     visited[city] = True
-        #     q.append(city)
-        #     while q:
-        #         cur = q.popleft()
-        #         for j in range(n):
-        #             if isConnected[cur][j] and cur != j and not visited[j]:
-        #                 child = j
-        #                 visited[child] = True
-        #                 q.append(child)
+        def bfs(city):
+            q = deque()
+            visited[city] = True
+            q.append(city)
+            while q:
+                cur = q.popleft()
+                for j in range(n):
+                    if isConnected[cur][j] and not visited[j]: # and cur != j 
+                        child = j
+                        visited[child] = True
+                        q.append(child)
 
         def dfs(cur):
             visited[cur] = True
             for j in range(n):
-                if isConnected[cur][j] and cur != j and not visited[j]:
+                if isConnected[cur][j] and not visited[j]: # and cur != j 
                     dfs(j)
 
         for city in range(n):

@@ -16,4 +16,4 @@ class Solution:
             memo[index] = max(rob, not_rob) 
             return memo[index]
 
-        return max(fn(nums[:n-1], 0, [-1] * n), fn(nums[1:], 0, [-1] * n))
+        return max(fn(nums[:n-1], 0, [-1] * (n-1)), fn(nums[1:], 0, [-1] * (n-1)))

@@ -9,6 +9,8 @@ class Solution:
         for i in range(n):
             pre[i+1] = pre[i] + nums[i]
 
+        print('pre: ', pre)
+
         freq = 1
         while r < n:
             windowsum = (r - l + 1) * nums[r]

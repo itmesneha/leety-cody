@@ -9,5 +9,7 @@ class Solution:
                 return memo[idx]
             memo[idx] = nums[idx] + min(fn(idx + 1), fn(idx + 2))
             return memo[idx]
-
-        return min(fn(0),fn(1))
+        
+        start_0 = fn(0)
+        start_1 = fn(1)
+        return min(start_1,start_0)

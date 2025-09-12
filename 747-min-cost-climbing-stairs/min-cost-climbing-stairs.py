@@ -5,7 +5,7 @@ class Solution:
             return 0
         if n == 1:
             return cost[0]
-        memo = [-1] * n
+        memo = [-1] * (n+1)
         def fn(idx, memo):
             if idx >= n:
                 return 0

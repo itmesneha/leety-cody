@@ -7,10 +7,10 @@ class Solution:
                 res.append(cur)
                 return
             for i in range(n):
-                if nums[i] in used:
+                if i in used:
                     continue
                 # used.add(nums[i])
-                fn(cur + [nums[i]], used + [nums[i]])
+                fn(cur + [nums[i]], used + [i])
                 # used.remove(nums[i])
 
         fn([], [])

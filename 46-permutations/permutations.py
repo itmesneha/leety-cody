@@ -9,9 +9,9 @@ class Solution:
             for i in range(n):
                 if nums[i] in used:
                     continue
-                used.add(nums[i])
-                fn(cur + [nums[i]], used)
-                used.remove(nums[i])
+                # used.add(nums[i])
+                fn(cur + [nums[i]], used + [nums[i]])
+                # used.remove(nums[i])
 
-        fn([], set())
+        fn([], [])
         return res

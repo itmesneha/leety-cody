@@ -9,11 +9,11 @@ class Solution:
             for i in range(n):
                 if i in used: # for duplicate numbers also this will work
                     continue
-                used.append(i)
+                used.add(i)
                 cur.append(nums[i])
                 fn(cur, used)
-                used.pop()
+                used.remove(i)
                 cur.pop()
 
-        fn([], [])
+        fn([], set())
         return res

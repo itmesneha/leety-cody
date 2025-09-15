@@ -4,14 +4,16 @@ class Solution:
         res = []
         def fn(cur, used):
             if len(cur) == n:
-                res.append(cur)
+                res.append(cur[:])
                 return
             for i in range(n):
-                if i in used:
+                if i in used: # for duplicate numbers also this will work
                     continue
-                # used.add(nums[i])
-                fn(cur + [nums[i]], used + [i])
-                # used.remove(nums[i])
+                used.append(i)
+                cur.append(nums[i])
+                fn(cur, used)
+                used.pop()
+                cur.pop()
 
         fn([], [])
         return res

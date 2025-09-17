@@ -19,11 +19,10 @@ class Solution:
             fn(node.right, level )
         fn(root , 1)
         ans = []
-        print('res: ', res)
+        # print('res: ', res)
         for level in res:
             ans.append(res[level][-1].val)
 
         return ans
-
 
         # return res

@@ -19,8 +19,8 @@ class Solution:
         ans = []
         for i in range(n):
             shift += diff[i]
-            total_shift = (ord(s[i]) - ord('a') + shift) % 26
-            ans.append(chr(ord('a') + total_shift))
+            actual_shift = (ord(s[i]) - ord('a') + shift) % 26
+            ans.append(chr(ord('a') + actual_shift))
 
         return ''.join(ans)
 

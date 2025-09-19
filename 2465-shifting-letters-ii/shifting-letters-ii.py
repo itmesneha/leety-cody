@@ -19,7 +19,7 @@ class Solution:
         ans = []
         for i in range(n):
             shift += diff[i]
-            actual_shift = (ord(s[i]) - ord('a') + shift) % 26
+            actual_shift = (ord(s[i]) - ord('a') + shift) % 26 # in python handles neagtaive values
             ans.append(chr(ord('a') + actual_shift))
 
         return ''.join(ans)

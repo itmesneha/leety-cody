@@ -16,8 +16,7 @@ class Solution:
                 new_start = min(start, intervals[i][0])
                 new_end = max(end, intervals[i][1])
 
-                ans.append([new_start, new_end])
-                
+                ans.append([new_start, new_end])          
 
             else:
                 ans.append(intervals[i])

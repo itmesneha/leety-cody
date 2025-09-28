@@ -1,26 +1,24 @@
-from collections import deque
+from collections import defaultdict, deque
 class Solution:
-    def canFinish(self, n: int, pre: List[List[int]]) -> bool:
-        adj = [[] for _ in range(n)]
-        indegree = [0] * n
-        for v, u in pre:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        adj = defaultdict(list)
+        indegree = [0] * numCourses
+        for v,u in prerequisites:
             adj[u].append(v)
             indegree[v] += 1
 
         q = deque()
-        for i in range(n):
+        for i in range(numCourses):
             if indegree[i] == 0:
                 q.append(i)
-        # print('q: ', q)
-        nodecount = 0
+        
+        count = 0
         while q:
-            cur = q.popleft()
-            # print('q: ', q)
+            cur = q.pop()
+            count += 1
             for child in adj[cur]:
                 indegree[child] -= 1
                 if indegree[child] == 0:
                     q.append(child)
-            nodecount += 1
-            # print('nodecount: ', nodecount)
 
-        return nodecount == n # no cycle therefore can take course , else not.
+        return count == numCourses

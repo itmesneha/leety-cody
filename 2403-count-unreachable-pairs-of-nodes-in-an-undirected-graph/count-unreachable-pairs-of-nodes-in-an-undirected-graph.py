@@ -14,6 +14,7 @@ class Solution:
             parent[i]= find(parent[i])
             return parent[i]
 
+        # join 2 sets
         def union(x, y):
             x_p = find(x)
             y_p = find(y)
@@ -26,6 +27,7 @@ class Solution:
                 parent[x_p] = y_p
                 rank[y_p] += 1
 
+        # go through each edge, if lead parent is not same , join them
         for u,v in edges:
             p_u = find(u)
             p_v = find(v)
@@ -33,12 +35,14 @@ class Solution:
             if p_u != p_v:
                 union(u, v)
 
+        # map to store each ilaka number of nodes
         hashmap = defaultdict(int)
 
+        # adding 1 based on leader of ilaka
         for i in range(n):
             hashmap[find(i)] += 1
 
-        print(hashmap)
+        # print(hashmap)
         remaining = n
         result = 0
         for component in hashmap:

@@ -1,32 +1,19 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        #defaultdict will setup a dictionary with default value as empty set
-        rows = collections.defaultdict(set) # r 
-        cols = collections.defaultdict(set) # c
-        box = collections.defaultdict(set) # key = (r // 3, c // 3)
+        m = len(board) # rows
+        n = len(board[0]) # cols
+        rows = defaultdict(list)
+        cols = defaultdict(list)
+        boxes = defaultdict(list) #[[-1 for _ in range(m//3)] for _ in range(n//3)]
 
-        # hashset = defaultdict(set)
-        # print('hashset: ', hashset)
-
-        # for i in range(3):
-        #     hashset[i].add(i)
-        #     hashset[i].add(i)
-        #     hashset[i].add(i + 2)
-
-        #print('hashset: ', hashset)
-
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] == '.':
+        for i in range(m):
+            for j in range(n):
+                val = board[i][j]
+                if val == '.':
                     continue
-                if (board[r][c] in rows[r] or
-                board[r][c] in cols[c] or
-                board[r][c] in box[(r // 3 , c // 3)]):
+                if val in rows[i] or val in cols[j] or val in boxes[(i//3,j//3)]:
                     return False
-                rows[r].add(board[r][c])
-                cols[c].add(board[r][c])
-                box[(r // 3 , c // 3)].add(board[r][c])
-                print('rows: ', rows)
-                print('cols: ', cols)
-                print('boxes: ', box)
+                rows[i].append(val)
+                cols[j].append(val)
+                boxes[(i//3, j//3)].append(val)
         return True

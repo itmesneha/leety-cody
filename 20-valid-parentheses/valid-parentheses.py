@@ -1,9 +1,7 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         d = {}
-        d[')'] = '('
-        d[']'] = '['
-        d['}'] = '{'
+        d = {')':'(', ']':'[', '}':'{'}
 
         stack = []
         for bracket in s:

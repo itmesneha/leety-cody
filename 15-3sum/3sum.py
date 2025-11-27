@@ -11,9 +11,10 @@ class Solution:
             j = i+1
             k = n-1
             while j < k:
-                if nums[j] + nums[k] < 0 - nums[i]:
+                total = nums[i] + nums[j] + nums[k]
+                if total < 0:
                     j += 1
-                elif nums[j] + nums[k] > 0 - nums[i]:
+                elif total > 0:
                     k -= 1
                 else:
                     res.append([nums[i], nums[j], nums[k]])

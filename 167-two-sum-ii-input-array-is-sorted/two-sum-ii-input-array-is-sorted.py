@@ -1,21 +1,19 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         '''
-        as it is sorted only need to look front
+        2 pointers
+        if left + right < sum:
+            left += 1
+        else:
+            right -= 1
         '''
         n = len(numbers)
-        for i in range(n):
-            left = i + 1
-            right = n-1
-            required = target - numbers[i]
-            while left <= right:
-                mid = (left + right) // 2
-                if numbers[mid] == required:
-                    return [i+1, mid+1]
-                if required < numbers[mid]:
-                    right = mid - 1
-                else:
-                    left = mid + 1
-
-
-        
+        left = 0
+        right = n-1
+        while left <= right:
+            if numbers[left] + numbers[right] == target:
+                return [left + 1, right + 1]
+            if numbers[left] + numbers[right] < target:
+                left += 1
+            else:
+                right -= 1

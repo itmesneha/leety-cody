@@ -15,11 +15,6 @@ class Solution:
                 elif tokens[i] == '*':
                     stack.append(num2 * num1)
                 else:
-                    # ans = num2 / num1
                     stack.append(int(num2 / num1))
-                    # if ans < 0:
-                    #     stack.append('0')
-                    # else:
-                    #     stack.append(ans)
             i += 1
         return int(stack.pop())

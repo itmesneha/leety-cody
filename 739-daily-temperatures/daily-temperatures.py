@@ -1,5 +1,17 @@
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        '''
+        use a monotonic stack (strictly increasing values downwards here)
+        for every value in temperatures, check if stack is non empty
+        then pop out all values that are <= current temperature value
+
+        then if stack is non empty the top element will be the closest greater
+        element.
+        then push current temperature into stack.
+
+        in stack we are storing indices as we need that to calculate days.
+        '''
+
         stack = [] # monotonic stack
         n = len(temperatures)
         res = []

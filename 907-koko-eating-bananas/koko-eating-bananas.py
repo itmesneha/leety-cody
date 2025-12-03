@@ -10,7 +10,6 @@ class Solution:
         n = len(piles)
         while min_k <= max_k:
             k = (min_k + max_k) // 2
-            print('k: ', k)
             time = 0
             for i in range(n):
                 if piles[i] - k <= 0:
@@ -19,7 +18,6 @@ class Solution:
                     time += piles[i] // k
                 else:
                     time += (piles[i] // k) + 1
-            print('time: ', time)
             if time > h:
                 min_k = k + 1
             elif time <= h:

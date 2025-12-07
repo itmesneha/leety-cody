@@ -14,7 +14,7 @@ class Solution:
             max_from_right.append(cur_max)
 
         max_from_right = max_from_right[::-1]
-        print('max_from_right: ', max_from_right)
+        # print('max_from_right: ', max_from_right)
         for i in range(n):
             profit = max(profit, max_from_right[i] - prices[i])
 

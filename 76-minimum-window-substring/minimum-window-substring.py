@@ -1,33 +1,28 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        required = defaultdict(int)
-        have = defaultdict(int)
-        if len(t) > len(s):
-            return ''
-        for _ in t:
-            required[_] += 1
-        n = len(s)
-        start = 0
-        end = 0
-        ans_indexes = [-1,-1]
-        minlength = float('inf')
-        have_count = 0
-        required_count = len(required)
-        for end in range(n):
-            if s[end] in required:
-                have[s[end]] += 1
-                if have[s[end]] == required[s[end]]:
-                    have_count += 1
-                while have_count == required_count:
-                    if end - start + 1 < minlength:
-                        ans_indexes = [start, end]
-                        minlength = end - start + 1
-                    if s[start] in required:
-                        have[s[start]] -= 1
-                        if have[s[start]] < required[s[start]]:
-                            have_count -= 1
-                    start += 1
-        if minlength == float('inf'):
-            return ''
-        else:
-            return s[ans_indexes[0] : ans_indexes[1] + 1] 
+        '''
+        '''
+        t_map = Counter(t)
+        s_map = defaultdict(int)
+        min_len = float('inf')
+        l = 0
+        ans = ''
+        needed = len(t_map)
+        for r in range(len(s)):
+            if s[r] in t_map:
+                s_map[s[r]] += 1
+                if s_map[s[r]] == t_map[s[r]]:
+                    needed -= 1
+            while needed == 0:
+                if r - l + 1 < min_len:
+                    min_len = r - l + 1
+                    ans = s[l:r+1]
+                # contract
+                if s[l] in t_map:
+                    s_map[s[l]] -= 1
+                if s_map[s[l]] < t_map[s[l]]:
+                    needed += 1
+                l += 1
+
+        return ans
+

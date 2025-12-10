@@ -10,9 +10,6 @@ class Solution:
         l,r = 0,0
         ans = []
         while r < n:
-            # print(f'queue: {queue}')x
-            while queue and nums[r] > nums[queue[0]]:
-                queue.popleft()
 
             if queue and l > queue[0]:
                 queue.popleft()
@@ -25,7 +22,7 @@ class Solution:
             if r >= k-1:
                 ans.append(nums[queue[0]])
                 l += 1
-            # print(f'ans: {ans}')
+
             r += 1
             
         return ans

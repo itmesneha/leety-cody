@@ -43,15 +43,3 @@ class Solution:
             cur = cur.next
 
         return new_head
-
-        # old = head # old list
-        # while old:
-        #     new = old_new[old]
-        #     if old.random:
-        #         new.random = old_new[old.random]
-        #     else:
-        #         new.random = None
-            
-        #     old = old.next
-
-        # return old_new[head]

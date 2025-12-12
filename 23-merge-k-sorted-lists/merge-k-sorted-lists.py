@@ -5,6 +5,9 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        '''
+        recursive merge function + divide and conquer pairwise joining
+        '''
         def merge(l1, l2):
             if not l1 and not l2:
                 return None
@@ -23,10 +26,12 @@ class Solution:
         if not lists:
             return None
 
-        while len(lists) >=2:
-            l1 = lists.pop()
-            l2 = lists.pop()
-            l3 = merge(l1, l2)
-            lists.append(l3)
+        while len(lists) > 1:
+            merged = []
+            for i in range(0, len(lists), 2):
+                l1 = lists[i]
+                l2 = lists[i+1] if i + 1 < len(lists) else None
+                merged.append(merge(l1, l2))
+            lists = merged
 
-        return lists.pop()
+        return lists[0]

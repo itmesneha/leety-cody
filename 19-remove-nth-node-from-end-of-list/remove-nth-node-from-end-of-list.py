@@ -6,27 +6,19 @@
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         '''
-        take a pointer to end keep count of total
-        take another one to correct
+        take first and second pointers with a difference of n (n nodes between them)
+        + first, second points to dummy node 
         '''
-        cur = head
-        if not head or not head.next:
-            return None
-        count = 0
-        while cur:
-            count += 1
-            cur = cur.next
-        # print('count: ', count)
-        to_delete = count - n # 0 - index
-        cur = head
-        dummy_head = ListNode(0)
-        dummy_head.next = cur
-        prev = dummy_head
-        index = 0
-        while index != to_delete:
-            prev = cur
-            cur = cur.next
-            index += 1
-        prev.next = cur.next
-        cur.next = None
-        return dummy_head.next
+        dummy = ListNode(0)
+        dummy.next = head
+        first, second = dummy, dummy
+        for _ in range(n+1):
+            second = second.next # now gap of n nodes between first & second
+
+        while second:
+            second = second.next
+            first = first.next 
+
+        first.next = first.next.next
+
+        return dummy.next

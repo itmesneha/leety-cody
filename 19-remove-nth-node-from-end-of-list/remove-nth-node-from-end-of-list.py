@@ -16,7 +16,7 @@ class Solution:
         while cur:
             count += 1
             cur = cur.next
-        print('count: ', count)
+        # print('count: ', count)
         to_delete = count - n # 0 - index
         cur = head
         dummy_head = ListNode(0)

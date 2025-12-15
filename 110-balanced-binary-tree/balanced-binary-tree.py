@@ -7,21 +7,22 @@
 class Solution:
     def fn(self, node):
         if not node:
-            return 0
-        left = self.fn(node.left)
-        if left == -1:
-            return -1
+            return True, 0
 
-        right = self.fn(node.right)
-        if right == -1:
-            return -1
+        left_balanced, left_depth = self.fn(node.left)
+        if not left_balanced:
+            return False, 0
 
-        if abs(left - right) > 1:
-            return -1
+        right_balanced, right_depth = self.fn(node.right)
+        if not right_balanced:
+            return False, 0
 
-        return 1 + max(self.fn(node.left), self.fn(node.right))
+        if abs(left_depth - right_depth) > 1:
+            return False, 0
+
+        return True, 1 + max(left_depth, right_depth)
 
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         if not root:
             return True
-        return self.fn(root) != -1
+        return self.fn(root)[0]

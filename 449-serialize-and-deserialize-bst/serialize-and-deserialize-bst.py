@@ -33,7 +33,7 @@ class Codec:
         preorder(root)
         output = ''.join(self.inorder_str) + '*' + ''.join(self.preorder_str)
 
-        print(output)
+        # print(output)
         return output
             
             
@@ -48,16 +48,16 @@ class Codec:
         ins, pres = data.split('*')
         inorder = ins.split(',')[:-1]
         preorder = pres.split(',')[:-1]
-        print(inorder)
-        print(preorder)
+        # print(inorder)
+        # print(preorder)
         inorder = [int(x) for x in inorder]
         preorder =  [int(x) for x in preorder]
         # for c in ins:
         #     inorder.append(int(c))
         # for c in pres:
         #     preorder.append(int(c))
-        print(inorder)
-        print(preorder)
+        # print(inorder)
+        # print(preorder)
 
         def build(inorder, preorder):
             if not inorder or not preorder:

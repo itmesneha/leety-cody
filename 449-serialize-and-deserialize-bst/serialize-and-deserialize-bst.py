@@ -6,32 +6,32 @@
 #         self.right = None
 
 class Codec:
-
+    '''
+    cannot use inorder + preorder trick as there are duplicates
+    can use any traversal except inorder as dont know root in it
+    using preorder here with nulls.
+    for deserialize keep index moving 1 forward.
+    Read values in preorder; on None return null, otherwise build node → left → right.
+    '''
     def serialize(self, root):
         """Encodes a tree to a single string.
         
         :type root: TreeNode
         :rtype: str
         """
-        self.inorder_str = []
-        self.preorder_str = []
-        def inorder(node):
-            if not node:
-                return
-            inorder(node.left)
-            self.inorder_str.append(str(node.val)+',')
-            inorder(node.right)
+        self.res = []
 
         def preorder(node):
             if not node:
-                return
-            self.preorder_str.append(str(node.val)+',')
+                self.res.append('None')
+                return 
+
+            self.res.append(str(node.val))
             preorder(node.left)
             preorder(node.right)
 
-        inorder(root)
         preorder(root)
-        output = ''.join(self.inorder_str) + '*' + ''.join(self.preorder_str)
+        output = ','.join(self.res)
 
         # print(output)
         return output
@@ -45,30 +45,23 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        ins, pres = data.split('*')
-        inorder = ins.split(',')[:-1]
-        preorder = pres.split(',')[:-1]
-        # print(inorder)
-        # print(preorder)
-        inorder = [int(x) for x in inorder]
-        preorder =  [int(x) for x in preorder]
-        # for c in ins:
-        #     inorder.append(int(c))
-        # for c in pres:
-        #     preorder.append(int(c))
-        # print(inorder)
+        preorder = data.split(',')
+        self.i = 0
         # print(preorder)
 
-        def build(inorder, preorder):
-            if not inorder or not preorder:
+        def build():
+            if preorder[self.i] == 'None':
+                self.i += 1
                 return None
-            cur = TreeNode(preorder[0])
-            mid = inorder.index(preorder[0])
-            cur.left = build( inorder[:mid], preorder[1:mid+1])
-            cur.right = build(inorder[mid+1:], preorder[mid+1:])
+
+            cur = TreeNode(int(preorder[self.i]))
+            self.i += 1
+            
+            cur.left = build()
+            cur.right = build()
             return cur
 
-        return build(inorder, preorder)
+        return build()
 
 
 

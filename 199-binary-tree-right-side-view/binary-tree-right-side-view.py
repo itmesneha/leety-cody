@@ -6,6 +6,10 @@
 #         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        '''
+        modify level order traversal logic, either keep rightside variable updated with cur
+        or keep count of last popped element from deque
+        '''
         q = deque()
         ans = []
         if not root:

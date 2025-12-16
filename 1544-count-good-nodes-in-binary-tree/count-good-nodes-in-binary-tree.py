@@ -10,23 +10,20 @@ class Solution:
         dfs on left and right keeping track of cur_max
         dfs(node, max(node.val, cur_max))
         '''
-        count = 0
-        # ans = []
-        # ans.append(root.val)
+
         def dfs(node, cur_max):
-            nonlocal count
             if not node:
-                return 
+                return 0
 
             if node.val >= cur_max:
-                # ans.append(node.val)
-                count += 1
-            
-            dfs(node.left, max(node.val, cur_max))
-            dfs(node.right, max(node.val, cur_max))
+                res = 1
+            else:
+                res = 0
 
-        dfs(root, float('-inf'))
-        # print('ans: ', ans)
-        # return len(ans)
-        return count
+            res += dfs(node.left, max(node.val, cur_max))
+            res += dfs(node.right, max(node.val, cur_max))
+
+            return res
+
+        return dfs(root, float('-inf'))
 

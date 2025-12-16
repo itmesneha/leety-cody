@@ -17,14 +17,16 @@ class Solution:
             qlen = len(q)
             for i in range(qlen):
                 cur = q.popleft()
-                if i == qlen -1:
-                    ans.append(cur.val)
+                rightside = cur
+                # if i == qlen -1:
+                #     ans.append(cur.val)
                 if cur.left:
                     q.append(cur.left)
                 if cur.right:
                     q.append(cur.right)
 
             # ans.append(q.popleft().val)
+            ans.append(rightside.val)
 
         return ans
 

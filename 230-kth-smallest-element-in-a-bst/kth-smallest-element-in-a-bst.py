@@ -9,17 +9,31 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         '''
         maintain max_heap of length k
+        better - inorder traversal is automatically ascending
         '''
-        self.max_heap = []
-        def fn(node):
+        def inorder(node):
             if not node:
                 return
-            h.heappush(self.max_heap, -node.val)
-            if len(self.max_heap) > k:
-                h.heappop(self.max_heap)
+            inorder(node.left)
+            self.arr.append(node.val)
+            inorder(node.right)
 
-            fn(node.left)
-            fn(node.right)
+        self.arr = []
+        inorder(root)
+        print(self.arr)
+        return self.arr[k-1]
 
-        fn(root)
-        return -1 * h.heappop(self.max_heap)
+
+        # self.max_heap = []
+        # def fn(node):
+        #     if not node:
+        #         return
+        #     h.heappush(self.max_heap, -node.val)
+        #     if len(self.max_heap) > k:
+        #         h.heappop(self.max_heap)
+
+        #     fn(node.left)
+        #     fn(node.right)
+
+        # fn(root)
+        # return -1 * h.heappop(self.max_heap)

@@ -7,6 +7,9 @@ import heapq as h
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        '''
+        maintain max_heap of length k
+        '''
         self.max_heap = []
         def fn(node):
             if not node:

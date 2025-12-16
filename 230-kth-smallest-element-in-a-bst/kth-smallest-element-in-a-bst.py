@@ -9,7 +9,7 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         '''
         maintain max_heap of length k
-        better - inorder traversal is automatically ascending
+        better - inorder traversal is automatically ascending for BST
         '''
         def inorder(node):
             if not node:

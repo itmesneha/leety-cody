@@ -7,14 +7,24 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        larger = max(p.val, q.val)
-        smaller = min(p.val, q.val)
+        '''
+        it is BST. if cur > p and cur > q: move left
+        if cur < p and cur < q: move right
+        else return cur
+        '''
+        if root.val > p.val and root.val > q.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        if root.val < p.val and root.val < q.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        return root
+        # larger = max(p.val, q.val)
+        # smaller = min(p.val, q.val)
 
-        while root:
-            if root.val > larger:
-                root = root.left
-            if root.val < smaller:
-                root = root.right
-            if smaller <= root.val <= larger:
-                return root
+        # while root:
+        #     if root.val > larger:
+        #         root = root.left
+        #     if root.val < smaller:
+        #         root = root.right
+        #     if smaller <= root.val <= larger:
+        #         return root
 

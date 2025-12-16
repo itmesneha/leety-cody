@@ -7,11 +7,7 @@
 
 class Codec:
     '''
-    cannot use inorder + preorder trick as there are duplicates
-    can use any traversal except inorder as dont know root in it
-    using preorder here with nulls.
-    for deserialize keep index moving 1 forward.
-    Read values in preorder; on None return null, otherwise build node → left → right.
+    to use bst property, encode to preorder without nulls then use build(low, high)
     '''
     def serialize(self, root):
         """Encodes a tree to a single string.
@@ -23,7 +19,6 @@ class Codec:
 
         def preorder(node):
             if not node:
-                self.res.append('None')
                 return 
 
             self.res.append(str(node.val))
@@ -45,23 +40,28 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
+        if not data:
+            return None
         preorder = data.split(',')
         self.i = 0
         # print(preorder)
-
-        def build():
-            if preorder[self.i] == 'None':
-                self.i += 1
+        n = len(preorder)
+        def build(low, high):
+            if self.i >= n:
                 return None
 
-            cur = TreeNode(int(preorder[self.i]))
+            val = int(preorder[self.i])
+            if not low < val < high:
+                return None
+
+            cur = TreeNode(val)
             self.i += 1
             
-            cur.left = build()
-            cur.right = build()
+            cur.left = build(low, cur.val)
+            cur.right = build(cur.val, high)
             return cur
 
-        return build()
+        return build(float('-inf'), float('inf'))
 
 
 

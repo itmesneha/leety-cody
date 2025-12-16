@@ -9,19 +9,22 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         '''
         maintain max_heap of length k
-        better - inorder traversal is automatically ascending for BST
+        better - inorder traversal with arr of size k is automatically ascending for BST
         '''
+        self.count = 0
+        self.ans = 0
         def inorder(node):
             if not node:
                 return
             inorder(node.left)
-            self.arr.append(node.val)
+            self.count += 1
+            if self.count == k:
+                self.ans = node.val
+                return 
             inorder(node.right)
 
-        self.arr = []
         inorder(root)
-        print(self.arr)
-        return self.arr[k-1]
+        return self.ans
 
 
         # self.max_heap = []

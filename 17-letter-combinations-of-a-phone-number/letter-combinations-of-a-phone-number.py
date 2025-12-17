@@ -5,14 +5,14 @@ class Solution:
         n = len(nums)
         def fn(idx, op):
             if idx == n:
-                self.res.append(''.join(op[:]))
+                self.res.append(op)
                 return
 
             for val in self.dic[nums[idx]]:
-                op.append(val)
-                fn(idx + 1, op)
-                op.pop()
+                # op.append(val)
+                fn(idx + 1, op + val)
+                # op.pop()
 
 
-        fn(0, [])
+        fn(0, '')
         return self.res

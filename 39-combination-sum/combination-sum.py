@@ -1,5 +1,8 @@
 class Solution:
     def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
+        '''
+        To reuse numbers: take and stay; to change numbers: skip and move.
+        '''
         self.res = []
         def fn(nums, op, index, target):
             if target < 0:

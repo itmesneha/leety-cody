@@ -1,5 +1,8 @@
 class Solution:
     def combinationSum2(self, nums: List[int], target: int) -> List[List[int]]:
+        '''
+        Sort, skip duplicates sideways, and once you take a number, you must move forward.
+        '''
         self.res = []
         nums.sort()
         def fn(index, target, op):
@@ -10,7 +13,7 @@ class Solution:
             if target < 0 or index == len(nums):
                 return
 
-            for i in range(index, len(nums)):
+            for i in range(index, len(nums)): # sideways
 
                 if i > index and nums[i] == nums[i-1]:
                     continue

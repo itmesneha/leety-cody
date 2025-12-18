@@ -1,11 +1,14 @@
 import heapq as h
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
+        '''
+        n+1 block + max heap
+        '''
         freq = [0] * 26
         for task in tasks:
             freq[ord(task) - ord('A')] += 1
 
-        print(freq)
+        # print(freq)
 
         time = 0
         maxheap = []

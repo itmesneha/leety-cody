@@ -1,7 +1,9 @@
 from collections import deque
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-
+        '''
+        explore via bfs or dfs
+        '''
         def explore(x,y): # bfs
             q = deque()
             grid[x][y] = '-1'

@@ -2,11 +2,27 @@ from collections import deque
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        '''
+
+        '''
         dir = [[0,1], [1,0],[0,-1], [-1,0]]
 
         m = len(grid)
         n = len(grid[0])
         count = 0
+
+        def dfs(x, y):
+            if x < 0 or x == m or y < 0 or y == n or grid[x][y] != 1:
+                return 0
+
+            grid[x][y] = -1
+            area = 1
+            for dx, dy in dir:
+                nx, ny = x + dx, y + dy
+                area += dfs(nx, ny)
+
+            return area
+
 
         def bfs(x, y):
             q = deque()
@@ -32,6 +48,6 @@ class Solution:
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 1:
-                    res = max(res, bfs(i, j))
+                    res = max(res, dfs(i, j))
 
         return res

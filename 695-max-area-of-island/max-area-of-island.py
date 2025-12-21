@@ -1,41 +1,37 @@
+from collections import deque
+
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        dir = [[0,1], [1,0],[0,-1], [-1,0]]
+
         m = len(grid)
         n = len(grid[0])
-        ans = 0
-        # def bfs(pos):
-        #     area = 1
-        #     i, j = pos
-        #     q = deque()
-        #     q.append((i, j))
-        #     grid[i][j] = -1
-        #     while q:
-        #         x, y = q.popleft()
-        #         for direction in directions:
-        #             x_, y_ = x + direction[0], y + direction[1]
-        #             print(x_, y_)
-        #             if x_ < 0 or x_ >= m or y_ < 0 or y_ >= n or grid[x_][y_] != 1:
-        #                 continue
-                    
-        #             area += 1
-        #             grid[x_][y_] = -1
-        #             q.append((x_, y_))
+        count = 0
 
-        #     return area
-
-        def dfs(x, y):
-            if x < 0 or x >= m or y < 0 or y >= n or grid[x][y] != 1:
-                return 0
+        def bfs(x, y):
+            q = deque()
+            q.append((x, y))
             grid[x][y] = -1
-            return (1 + dfs(x +1, y) + dfs(x - 1, y) + dfs(x, y+1) + dfs(x, y-1))
+            area = 1
 
+            while q:
+                curx, cury = q.popleft()
+                for dx, dy in dir:
+                    nx = curx + dx
+                    ny = cury + dy
+                    if nx < 0 or nx == m or ny < 0 or ny == n or grid[nx][ny] != 1:
+                        continue
+
+                    grid[nx][ny] = -1
+                    area += 1
+                    q.append((nx, ny))
+
+            return area
+
+        res = 0
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 1:
-                    # ans = max(ans, bfs((i, j)))
-                    ans = max(ans, dfs(i, j))
+                    res = max(res, bfs(i, j))
 
-        return ans
-
-    
+        return res

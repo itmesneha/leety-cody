@@ -1,36 +1,42 @@
 from collections import deque
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
+        '''
+        multi source BFS
+        at end run through whole matrix to check if any fresh oranges left
+
+        how to deal with time - add it as part of deque
+        '''
+
+        directions = [[0,1], [0,-1], [1,0], [-1,0]]
+
+        q = deque()
+
         m = len(grid)
         n = len(grid[0])
-        q = deque()
-        time = 0
-        fresh_count = 0
+
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 2:
-                    q.append((i, j, 0))
-                if grid[i][j] == 1:
-                    fresh_count += 1
-                
+                    q.append((i,j,0))
 
-        directions = [(0,1), (0,-1), (1,0), (-1,0)]
-
+        time = 0
+        
         while q:
-            i, j, time = q.popleft()
-            for di, dj in directions:
-                ni, nj = i + di, j + dj
-                if ni >= 0 and ni < m and nj >= 0 and nj < n and grid[ni][nj] == 1:
-                    fresh_count -= 1
-                    grid[ni][nj] = 2
-                    q.append((ni, nj, time + 1))
+            x,y, time = q.popleft()
 
-        # for i in range(m):
-        #     for j in range(n):
-        #         if grid[i][j] == 1:
-        #             return -1
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                if nx < 0 or nx == m or ny < 0 or ny == n or grid[nx][ny] != 1:
+                    continue
 
-        if fresh_count != 0:
-            return -1
+                grid[nx][ny] = 2
+                q.append((nx,ny, time + 1))
+
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    return -1
 
         return time

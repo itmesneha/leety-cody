@@ -1,38 +1,73 @@
+from collections import deque
 class Solution:
-    def pacificAtlantic(self, grid: List[List[int]]) -> List[List[int]]:
-        if not grid or not grid[0]:
-            return []
-
-        m, n = len(grid), len(grid[0])
-        pac, atl = set(), set()
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        '''
+        correct approach - 
+        take bfs start points as full top & left row for pacific
+        full bottom & right row for atlantic
+        find which cells reachable for 2 oceans then intersect them
         
-        def dfs(i, j, visited, prev_height):
-            if (i, j) in visited or i < 0 or i >= m or j < 0 or j >= n:
-                return
+        wrong approach - 
+        upper rightmost + lower leftmost - start points for BFS - cannot do this 
+        because cells can flow to both oceans, possibly via different paths
+        can only move if height(new cell) >= heigh(current cell)
+        '''
 
-            if grid[i][j] < prev_height:
-                return
-            
-            visited.add((i, j))
-            
-            for di, dj in [(0,1), (0,-1), (1,0), (-1,0)]:
-                dfs(i + di, j + dj, visited, grid[i][j])
+        m = len(heights)
+        n = len(heights[0])
 
+        p_q = deque() # pacific queue
+        a_q = deque() # atlantic queue
+
+        pacific = []
+        atlantic = []
+        visited_pacific = set()
+        visited_atlantic = set()
+
+        # q.append((0,n-1))
+        # q.append((m-1,0))
 
         for i in range(m):
-            dfs(i, 0, pac, grid[i][0])
-        for j in range(n):
-            dfs(0, j, pac, grid[0][j])
+            for j in range(n):
+                if i == 0 or j == 0:
+                    p_q.append((i,j))
+                    visited_pacific.add((i,j))
 
-        for i in range(m):
-            dfs(i, n-1, atl, grid[i][n-1])
-        for j in range(n):
-            dfs(m-1, j, atl, grid[m-1][j])
+                if j == n-1 or i == m-1:
+                    a_q.append((i,j))
+                    visited_atlantic.add((i,j))
 
-        # ans = []
-        # for val in pac:
-        #     if val in atl:
-        #         ans.append(val)
 
-        # return ans
-        return list(pac & atl)
+        directions = [[0,1], [0,-1], [1,0], [-1,0]]
+
+        while p_q:
+            x,y = p_q.popleft()
+            pacific.append((x,y))
+
+            for dx,dy in directions:
+                nx, ny = x + dx, y + dy
+                if nx < 0 or nx == m or ny < 0 or ny == n or (nx,ny) in visited_pacific:
+                    continue
+                if heights[nx][ny] >= heights[x][y]:
+                    visited_pacific.add((nx,ny))
+                    p_q.append((nx,ny))
+
+        while a_q:
+            x,y = a_q.popleft()
+            atlantic.append((x,y))
+
+            for dx,dy in directions:
+                nx, ny = x + dx, y + dy
+                if nx < 0 or nx == m or ny < 0 or ny == n or (nx,ny) in visited_atlantic:
+                    continue
+                if heights[nx][ny] >= heights[x][y]:
+                    visited_atlantic.add((nx,ny))
+                    a_q.append((nx,ny))
+
+        # intersection of pacific & atlantic
+        ans = []
+        for i,j in pacific:
+            if (i,j) in atlantic:
+                ans.append((i,j))
+
+        return ans

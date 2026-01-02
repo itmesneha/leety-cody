@@ -8,6 +8,7 @@ class Solution:
         flip to 'S' for (safe)
 
         At end any 'O' still left, means not reachable from border - flip to 'X'
+        and flip back 'S' to '0'
         """
 
         m = len(board)

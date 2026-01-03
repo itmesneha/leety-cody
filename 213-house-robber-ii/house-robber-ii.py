@@ -1,19 +1,31 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        '''
+        Break the circle into two linear problems and take the max.
+        ie max( nums[:n-1], nums[1:] )
+        rob = nums[i] + fn(i+2)
+            not_rob = fn(i+1)
+        memo[i]  = max(rob, not_rob)
+        '''
         n = len(nums)
+        
         if n == 1:
             return nums[0]
-        if n == 2:
-            return max(nums)
 
-        def fn(nums, index, memo):
-            if index >= len(nums):
+      
+        memo = [-1] * (n+1)
+
+        def fn(i, nums, memo):
+            if i >= len(nums):
                 return 0
-            if memo[index] != -1:
-                return memo[index]
-            not_rob = fn(nums, index + 1, memo)
-            rob = nums[index] + fn(nums, index + 2, memo)
-            memo[index] = max(rob, not_rob) 
-            return memo[index]
 
-        return max(fn(nums[:n-1], 0, [-1] * (n-1)), fn(nums[1:], 0, [-1] * (n-1)))
+            if memo[i] != -1:
+                return memo[i]
+
+            rob = nums[i] + fn(i+2, nums, memo)
+            not_rob = fn(i+1, nums, memo)
+
+            memo[i]  = max(rob, not_rob)
+            return memo[i]
+
+        return max(fn(0, nums[:n-1], [-1] * (n+1)), fn(0, nums[1: ], [-1] * (n+1)))

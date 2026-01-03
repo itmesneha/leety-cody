@@ -9,14 +9,11 @@ class Solution:
         ar = [-1] * (n+1)
 
         def fn(step):
-            if step > n:
+            if step >= n:
                 return 0
 
             if ar[step] != -1:
                 return ar[step]
-
-            if step == n:
-                return 0
 
             ar[step] = cost[step] + min(fn(step + 1) , fn(step + 2))
 

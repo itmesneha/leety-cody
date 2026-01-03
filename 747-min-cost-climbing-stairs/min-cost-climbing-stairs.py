@@ -1,5 +1,9 @@
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
+        '''
+        ar[step] = cost[step] + min(fn(step + 1) , fn(step + 2))
+        return min(start_0 , start_1) - reuse memo across function calls
+        '''
         
         n = len(cost)
         ar = [-1] * (n+1)
@@ -18,4 +22,6 @@ class Solution:
 
             return ar[step]
         
-        return min(fn(0) , fn(1))
+        start_0 = fn(0)
+        start_1 = fn(1)
+        return min(start_0 , start_1)

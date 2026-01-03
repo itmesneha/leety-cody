@@ -16,6 +16,10 @@ class Solution:
         You only need two checks:
             - len(edges) == n - 1
             - graph is connected
+
+        n - 1 edges ⇒ no cycles possible
+        BFS reaching all nodes ⇒ connected
+        Connected + no cycles ⇒ tree
         '''
         if len(edges) != n-1:
             return False 

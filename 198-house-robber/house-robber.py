@@ -1,21 +1,21 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        '''
+        '''
+
         n = len(nums)
-        memo = {}
-        def fn(index, money):
-            if index >= n:
-                return money
-            
-            if (index, money) in memo:
-                return memo[(index, money)]
+        memo = [-1] * (n+1)
+        def fn(i):
+            if i >= n:
+                return 0
 
-            not_rob = fn(index + 1, money)
+            if memo[i] != -1:
+                return memo[i]
 
-            rob = fn(index + 2, money + nums[index])
+            rob = nums[i] + fn(i+2)
+            not_rob = fn(i+1)
 
-            res = max(rob, not_rob) 
-            memo[(index, money)] = res
-            return res
+            memo[i]  = max(rob, not_rob)
+            return memo[i]
 
-
-        return fn(0, 0)
+        return fn(0)
